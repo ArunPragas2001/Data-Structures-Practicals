@@ -1,0 +1,27 @@
+public class ArrayLinearListMain2{
+    public static void main(String[] args) {
+        ArrayLinearList aLL = new ArrayLinearList(5); // Start with a smaller capacity to test resizing
+
+        aLL.add(0, Integer.valueOf(4));
+        aLL.add(0, Integer.valueOf(3));
+        aLL.add(0, Integer.valueOf(2));
+        aLL.add(0, Integer.valueOf(1));
+        aLL.add(0, Integer.valueOf(0));
+        
+        System.out.println("After initial adds: " + aLL.toString()); // Expected: [0, 1, 2, 3, 4]
+
+        aLL.add(0, Integer.valueOf(7)); // This will cause a resize
+        aLL.add(0, Integer.valueOf(8));
+        
+        System.out.println("After more adds (with resize): " + aLL.toString()); // Expected: [8, 7, 0, 1, 2, 3, 4]
+
+        aLL.remove(5); // Remove '3'
+        System.out.println("After remove(5): " + aLL.toString()); // Expected: [8, 7, 0, 1, 2, 4]
+        
+        aLL.remove(4); // Remove '2'
+        System.out.println("After remove(4): " + aLL.toString()); // Expected: [8, 7, 0, 1, 4]
+
+        System.out.println("Get element at index 2: " + aLL.get(2)); // Expected: 0
+        System.out.println("Get element at index 0: " + aLL.get(0)); // Expected: 8
+    }
+}

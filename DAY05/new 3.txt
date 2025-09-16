@@ -1,0 +1,8 @@
+create table details(NAME VARCHAR(10),
+Owner VARCHAR(20),
+species VARCHAR(10),
+sex VARCHAR(10),
+birth DATE,
+death DATE);
+
+

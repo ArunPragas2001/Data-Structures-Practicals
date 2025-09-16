@@ -1,0 +1,10 @@
+Fluffy	harold	cat	f	1993-02-04	null
+claws	gwen	cat	m	1994-03-17	null
+Buffy	Harold	Dog	F	1989-05-13	null
+Fang	Benny	DOG	m	1990-08-27	null
+Chirpy	Gwen	Bird	F	1993-02-04	null
+Whistler	Gwen	Bird	Null	1996-04-29	null
+
+
+
+select name,species,birth from details order by species, birth desc;

@@ -1,0 +1,7 @@
+public void print() {
+    System.out.println("|****** Student Details *******|");
+    System.out.println("| Name  : " + name);
+    System.out.println("| Age   : " + age);
+    System.out.println("| RegNo : " + registration_no);
+    System.out.println("| GPA   : " + gpa);
+}

@@ -1,0 +1,7 @@
+package a;
+
+public class Test{
+ public void println(){
+     system.out.println("HI from class test in package a");
+  }
+}

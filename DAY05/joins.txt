@@ -1,0 +1,147 @@
+select columns from table1
+inner join table2
+on table1.column=table2.column;
+
+
+
+select column_name(s)
+from table1
+left join table2
+on table_A.column_name=table_B.column_name
+
+
+
+select column_name(s)
+from table1
+right join table2
+on table_B.column_name=table_A.column.name
+
+
+select column_name(s)
+from Table_A
+cross Join Table_B
+
+
+
+select column_name(s)
+From table1 T1, table T2
+where condition;
+
+
+
+
+create table Employees(
+   employee_id varchar(20) primary key,
+   Name varchar(20) ,
+   department_id int,
+   manager_id int,
+   salary int)
+
+
+create table Department(
+   department_id int primary key,
+   Department_name varchar(20)
+
+
+)
+
+alter table department modify column department_id varchar(50) 
+
+
+insert into Employees values
+(1,'Alice',10,NULL,60000.00),
+(2,'Bob',20,1,50000.00),
+(3,'Charlie',10,1,55000.00),
+(4,'David',NULL,2,70000.00),
+(5,'Eve',30,NULL,45000.00);
++-------------+---------+---------------+------------+--------+
+| employee_id | Name    | department_id | manager_id | salary |
++-------------+---------+---------------+------------+--------+
+| 1           | Alice   |            10 |       NULL |  60000 |
+| 2           | Bob     |            20 |          1 |  50000 |
+| 3           | Charlie |            10 |          1 |  55000 |
+| 4           | David   |          NULL |          2 |  70000 |
+| 5           | Eve     |            30 |       NULL |  45000 |
++-------------+---------+---------------+------------+--------+
+
+
+insert into Department values
+(10,'HR'),(20,'Engineering'),
+(30,'Marketing'),(40,'Sales');
+
++---------------+-----------------+
+| department_id | Department_name |
++---------------+-----------------+
+| 10            | HR              |
+| 20            | Engineering     |
+| 30            | Marketing       |
+| 40            | Sales           |
++---------------+-----------------+
+
+
+
+
+select Name,Department_name from employees inner join department
+on employee.name=department.department_id;
+
+
+
+select employees.Name,department.department_id 
+from employees
+inner join department 
+on department.department_id=employees.department_id;
+
+
+select employees.Name,department.department_name
+from employees
+left join department 
+on department.department_id=employees.department_id;
+
+
+select department.department_name,employees.Name
+from employees
+right join department 
+on department.department_id=employees.department_id;
+
+
+select employees.name,department.department_name
+from employees
+cross join department;
+
+
+select employees.name,department.department_name
+from employees
+self join department;
+
+
+select e1.Name as employees ,e2.Name as manager
+from employees e1
+join employees e2
+on   
+e1.manager_id=e2.employee_id;
+
+
+
+
+create table Employee_Details(
+id int,
+Name varchar(20),
+Age int,
+Gender varchar(5),
+Salary int,
+Join_Date date,
+Last_Promotion_Date date
+
+);
+
+
+
+insert into Employee_Details values
+(1,'Hendry',42,'Male',78000, "2017-03-15", "2020-10-20"),
+(2,'Evelyn',29,'Female',59000,"2019-01-10","2022-07-05"),
+(3,'Jacob',37,'Male',67000,"2024-02-28","2024-08-10"),
+(4,'Abigai',23,'Female',50000,"2023-06-05","2024-04-15"),
+(5,'Noah',31,'Male',66000,"2018-08-20","2022-03-25"),
+(6,'Lily',25,'Female',52000,"2020-07-30","2023-02-10"),
+(7,'Samuel',43,'Male',79000,"2016-12-12","2020-09-28"),
+(8,'Grace',28,'Female',57000,"2019-10-22","2022-06-15");

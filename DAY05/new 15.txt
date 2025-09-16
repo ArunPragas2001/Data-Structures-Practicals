@@ -1,0 +1,15 @@
+private void btnSubmit_Click(object sender, EventArgs e)
+{
+    if (radioMale.Checked)
+    {
+        lblResult.Text = "You selected: Male";
+    }
+    else if (radioFemale.Checked)
+    {
+        lblResult.Text = "You selected: Female";
+    }
+    else
+    {
+        lblResult.Text = "Please select a gender.";
+    }
+}

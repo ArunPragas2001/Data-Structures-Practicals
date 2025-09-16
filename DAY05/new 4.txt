@@ -1,0 +1,57 @@
+ update pet set DoB='1994-03-17' where Name='calus' and Owner='john'; 
+ 
+ 
+  select * from pet where name like "%y";
+  MariaDB [pet]> select * from pet where name like "%y";
++-------+-------+------+------+------------+-------+
+| Name  | Owner | Pet  | Sex  | DoB        | Death |
++-------+-------+------+------+------------+-------+
+| Sandy | Narol | Cat  | F    | 1998-02-04 | NULL  |
+| Puppy | John  | Bird | M    | 2001-04-14 | NULL  |
++-------+-------+------+------+------------+-------+
+  select * from pet where name like "%ff";
+  MariaDB [pet]> select * from pet where name like "%ff";
++-------+--------+------+------+------------+-------+
+| Name  | Owner  | Pet  | Sex  | DoB        | Death |
++-------+--------+------+------+------------+-------+
+| Fluff | Harold | Cat  | F    | 1993-02-04 | NULL  |
+| Cluff | Gwen   | Bird | F    | 1998-02-04 | NULL  |
++-------+--------+------+------+------------+-------+
+  select * from pet where name like "%W%";
+  
+MariaDB [pet]> select * from pet where name like "%W%";
++--------+--------+------+------+------------+-------+
+| Name   | Owner  | Pet  | Sex  | DoB        | Death |
++--------+--------+------+------+------------+-------+
+| Bowser | Harold | Dog  | F    | 1993-02-04 | NULL  |
++--------+--------+------+------+------------+-------+
+ 
+  MariaDB [pet]> select * from pet where name REGEXP '^b';
++--------+--------+------+------+------------+-------+
+| Name   | Owner  | Pet  | Sex  | DoB        | Death |
++--------+--------+------+------+------------+-------+
+| Bowser | Harold | Dog  | F    | 1993-02-04 | NULL  |
++--------+--------+------+------+------------+-------+
+  select * from pet where name REGEXP 'ff$';
+  +-------+--------+------+------+------------+-------+
+| Name  | Owner  | Pet  | Sex  | DoB        | Death |
++-------+--------+------+------+------------+-------+
+| Fluff | Harold | Cat  | F    | 1993-02-04 | NULL  |
+| Calus | John   | Dog  | M    | 1994-03-17 | NULL  |
+| Sandy | Narol  | Cat  | F    | 1998-02-04 | NULL  |
+| Puppy | John   | Bird | M    | 2001-04-14 | NULL  |
+| Calus | Gwen   | Bird | M    | 2000-04-14 | NULL  |
+| Cluff | Gwen   | Bird | F    | 1998-02-04 | NULL  |
++-------+--------+------+------+------------+-------+
+  
+  select * from pet where name REGEXP '^.{5}$';
++-------+--------+------+------+------------+-------+
+| Name  | Owner  | Pet  | Sex  | DoB        | Death |
++-------+--------+------+------+------------+-------+
+| Fluff | Harold | Cat  | F    | 1993-02-04 | NULL  |
+| Calus | John   | Dog  | M    | 1994-03-17 | NULL  |
+| Sandy | Narol  | Cat  | F    | 1998-02-04 | NULL  |
+| Puppy | John   | Bird | M    | 2001-04-14 | NULL  |
+| Calus | Gwen   | Bird | M    | 2000-04-14 | NULL  |
+| Cluff | Gwen   | Bird | F    | 1998-02-04 | NULL  |
++-------+--------+------+------+------------+-------+

@@ -1,0 +1,13 @@
+package human;
+
+public class Person extends human{
+ 
+ public void talk(String word){
+	 string name;
+	 
+	 System.out.println(""Human says:"+Word);
+	 
+ }
+}
+  
+ 

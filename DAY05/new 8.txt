@@ -1,0 +1,193 @@
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+
+/**
+ * Array-based implementation of a Linear List.
+ * @param <E> The type of elements held in this list.
+ */
+public class ArrayLinearList {
+
+    protected Object[] elementData;
+    protected int size;
+
+    private static final int DEFAULT_CAPACITY = 10;
+
+    /**
+     * Constructs an empty list with the default initial capacity.
+     */
+    public ArrayLinearList() {
+        this.elementData = new Object[DEFAULT_CAPACITY];
+        this.size = 0;
+    }
+
+    /**
+     * Constructs an empty list with the specified initial capacity.
+     * @param initialCapacity The initial capacity of the list.
+     * @throws IllegalArgumentException if initialCapacity is less than 0.
+     */
+    public ArrayLinearList(int initialCapacity) {
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+        }
+        this.elementData = new Object[initialCapacity];
+        this.size = 0;
+    }
+
+    /**
+     * Checks if the given index is valid.
+     * @param index The index to check.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+    }
+
+    // --- Provided methods ---
+
+    /**
+     * Resizes the internal array when capacity is full.
+     */
+    private void grow() {
+        int newCapacity = elementData.length * 2;
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+
+    /**
+     * Appends the specified element to the end of this list.
+     * Dynamically increases the array length if the list is full.
+     * @param theElement The element to be added.
+     */
+    public void add(E theElement) {
+        if (size == elementData.length) {
+            grow();
+        }
+        elementData[size++] = theElement;
+    }
+
+    /**
+     * Replaces the element at the specified position in this list with the specified element.
+     * @param theIndex index of the element to replace.
+     * @param theElement element to be stored at the specified position.
+     * @return the element previously at the specified position.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    public E set(int theIndex, E theElement) {
+        checkIndex(theIndex);
+        @SuppressWarnings("unchecked")
+        E oldValue = (E) elementData[theIndex];
+        elementData[theIndex] = theElement;
+        return oldValue;
+    }
+
+    /**
+     * Sets the size of the list.
+     * If the new size is smaller than the current size, elements beyond the new size are removed.
+     * If the new size is larger, new `null` elements are added.
+     * @param newSize The new size of the list.
+     * @throws IllegalArgumentException if newSize is negative.
+     */
+    public void setSize(int newSize) {
+        if (newSize < 0) {
+            throw new IllegalArgumentException("New size cannot be negative.");
+        }
+        if (newSize > size) {
+            // New size is larger: pad with nulls
+            if (newSize > elementData.length) {
+                elementData = Arrays.copyOf(elementData, newSize);
+            }
+            for (int i = size; i < newSize; i++) {
+                elementData[i] = null;
+            }
+        } else if (newSize < size) {
+            // New size is smaller: truncate and garbage collect
+            for (int i = newSize; i < size; i++) {
+                elementData[i] = null; // Help with garbage collection
+            }
+        }
+        this.size = newSize;
+    }
+
+    /**
+     * Removes all elements from this list, leaving it empty.
+     */
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            elementData[i] = null; // Clear elements for garbage collection
+        }
+        size = 0;
+    }
+
+    /**
+     * Removes all elements in the specified range.
+     * @param fromIndex The index of the first element to be removed (inclusive).
+     * @param toIndex The index of the last element to be removed (exclusive).
+     * @throws IndexOutOfBoundsException if the range is invalid.
+     */
+    public void removeRange(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || fromIndex > size || toIndex > size || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Invalid range: [" + fromIndex + ", " + toIndex + ")");
+        }
+        int numRemoved = toIndex - fromIndex;
+        if (numRemoved > 0) {
+            System.arraycopy(elementData, toIndex, elementData, fromIndex, size - toIndex);
+            size -= numRemoved;
+            for (int i = size; i < size + numRemoved; i++) {
+                elementData[i] = null; // Help with garbage collection
+            }
+        }
+    }
+
+    /**
+     * Returns the index of the last occurrence of the specified element in this list,
+     * or -1 if this list does not contain the element.
+     * @param o The element to search for.
+     * @return The index of the last occurrence, or -1 if not found.
+     */
+    public int lastIndexOf(Object o) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (o == null) {
+                if (elementData[i] == null) {
+                    return i;
+                }
+            } else if (o.equals(elementData[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the number of elements in this list.
+     * @return The size of the list.
+     */
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Returns true if this list contains no elements.
+     * @return true if the list is empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        if (size == 0) {
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(elementData[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+}
